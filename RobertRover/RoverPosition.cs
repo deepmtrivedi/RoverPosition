@@ -106,68 +106,35 @@ namespace RobertRover
 
         private void SetPosition(char movingDirection, int steps)
         {
-            // if moving Direction is Right (R) 
-            if (movingDirection == 'R')
+            if ((movingDirection == 'R' && cordinateWithDirection["D"] == 1) || (movingDirection == 'L' && cordinateWithDirection["D"] == 2))
             {
-                switch (cordinateWithDirection["D"])
-                {
-                    case 1:
-                        cordinateWithDirection["X"] = cordinateWithDirection["X"] + steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.E);
-                        break;
-                    case 2:
-                        // If final X cordinator is less than 0 then it will be improper move
-                        if (cordinateWithDirection["X"] - steps < 0)
-                            throw new Exception("Impermissible Movement");
-                        cordinateWithDirection["X"] = cordinateWithDirection["X"] - steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.W);
-                        break;
-                    case 3:
-                        // If final Y cordinator is less than 0 then it will be improper move
-                        if (cordinateWithDirection["Y"] - steps < 0)
-                            throw new Exception("Impermissible Movement");
-                        cordinateWithDirection["Y"] = cordinateWithDirection["Y"] - steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.S);
-                        break;
-                    case 4:
-                        cordinateWithDirection["Y"] = cordinateWithDirection["Y"] + steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.N);
-                        break;
-                    default:
-                        break;
-                }
+                cordinateWithDirection["X"] = cordinateWithDirection["X"] + steps;
+                cordinateWithDirection["D"] = Convert.ToInt32(Directions.E);
+            }
+            else if ((movingDirection == 'R' && cordinateWithDirection["D"] == 2) || (movingDirection == 'L' && cordinateWithDirection["D"] == 1))
+            {
+                if (cordinateWithDirection["X"] - steps < 0)
+                    throw new Exception("Impermissible Movement");
+                cordinateWithDirection["X"] = cordinateWithDirection["X"] - steps;
+                cordinateWithDirection["D"] = Convert.ToInt32(Directions.W);
+            }
+            else if ((movingDirection == 'R' && cordinateWithDirection["D"] == 3) || (movingDirection == 'L' && cordinateWithDirection["D"] == 4))
+            {
+                // If final Y cordinator is less than 0 then it will be improper move
+                if (cordinateWithDirection["Y"] - steps < 0)
+                    throw new Exception("Impermissible Movement");
+                cordinateWithDirection["Y"] = cordinateWithDirection["Y"] - steps;
+                cordinateWithDirection["D"] = Convert.ToInt32(Directions.S);
+            }
+            else if ((movingDirection == 'R' && cordinateWithDirection["D"] == 4) || (movingDirection == 'L' && cordinateWithDirection["D"] == 3))
+            {
+                // If final Y cordinator is less than 0 then it will be improper move
+                cordinateWithDirection["Y"] = cordinateWithDirection["Y"] + steps;
+                cordinateWithDirection["D"] = Convert.ToInt32(Directions.N);
+            }
 
-            }
-            else
-            {
-                switch (cordinateWithDirection["D"])
-                {
-                    case 1:
-                        // If final X cordinator is less than 0 then it will be improper move
-                        if (cordinateWithDirection["X"] - steps < 0)
-                            throw new Exception("Impermissible Movement");
-                        cordinateWithDirection["X"] = cordinateWithDirection["X"] - steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.W);
-                        break;
-                    case 2:
-                        cordinateWithDirection["X"] = cordinateWithDirection["X"] + steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.E);
-                        break;
-                    case 3:
-                        cordinateWithDirection["Y"] = cordinateWithDirection["Y"] + steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.N);
-                        break;
-                    case 4:
-                        // If final Y cordinator is less than 0 then it will be improper move
-                        if (cordinateWithDirection["Y"] - steps < 0)
-                            throw new Exception("Impermissible Movement");
-                        cordinateWithDirection["Y"] = cordinateWithDirection["Y"] - steps;
-                        cordinateWithDirection["D"] = Convert.ToInt32(Directions.S);
-                        break;
-                    default:
-                        break;
-                }
-            }
         }
+
     }
+
 }
